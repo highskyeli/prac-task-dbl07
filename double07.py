@@ -5,9 +5,9 @@ computer_ammo = 1
 
 gameon = True
 
-print("Welcome to the game 007! You must beat our AI by choosing three choices! Shoot, Shield or Reload! If you shoot\
-    while the AI does not shield themselves, You Win! However, they can do the same thing to you.\
-     Watch your ammo count as you may need to reload!")
+print('''Welcome to the game 007! You must beat our AI by choosing three choices! Shoot, Shield or Reload! If you shoot
+    while the AI does not shield themselves, You Win! However, they can do the same thing to you.
+    Watch your ammo count as you may need to reload!''')
 
 
 def DBL07(computer_ammo, user_ammo):
@@ -15,7 +15,7 @@ def DBL07(computer_ammo, user_ammo):
     gameon = True
 
     choices = ['shoot', 'shield', 'reload']
-    computer_choice = random.choice(choices)
+    computer_choice = random.choices(choices, weights = [5,10,3])[0]
     user_choice = input("Enter your choice of Shoot, Shield, or Reload: ").lower()
 
     print("Your opponent chose:", computer_choice)
@@ -38,13 +38,22 @@ def DBL07(computer_ammo, user_ammo):
                 gameon = False
             elif computer_ammo < 0 and user_ammo < 0:
                 print("No ammo, Try again")
-        
+
+
+
         if computer_choice == 'reload':
-            print("You win!")
-            gameon = False
+            if user_ammo > 0:
+                print("You win!")
+                gameon = False
+            elif user_ammo <= 0:
+                print("You ran out of ammo! RELOAD!")
         elif computer_choice == 'shield':
-            user_ammo -= 1
-            print("Deflected!") 
+            if user_ammo > 0:
+                user_ammo -= 1
+                print("Deflected!") 
+            else:
+                print("You ran out of ammo! RELOAD!")
+        
                
     elif user_choice == 'shield':
         if computer_choice == 'shoot':
