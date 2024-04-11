@@ -1,7 +1,5 @@
 import random
 
-
-
 user_ammo = 1
 computer_ammo = 1
 
@@ -12,7 +10,7 @@ print("Welcome to the game 007! You must beat our AI by choosing three choices! 
      Watch your ammo count as you may need to reload!")
 
 
-def DBL07():
+def DBL07(computer_ammo, user_ammo):
 
     gameon = True
 
@@ -26,11 +24,21 @@ def DBL07():
         print(user_choice)
         print("Invalid choice. Please choose again from Shoot, Shield, or Reload.")
         
-    elif user_choice == 'shoot' and computer_choice == 'shoot':
-        print("Tie!")
-        gameon = False
 
     elif user_choice == 'shoot':
+        if computer_choice == 'shoot':
+            if computer_ammo > 0 and user_ammo > 0:
+                print("Tie!")
+                gameon = False
+            elif computer_ammo <= 0 and user_ammo > 0:
+                print("You Win!")
+                gameon = False
+            elif computer_ammo > 0 and user_ammo < 0:
+                print("You Lose")
+                gameon = False
+            elif computer_ammo < 0 and user_ammo < 0:
+                print("No ammo, Try again")
+        
         if computer_choice == 'reload':
             print("You win!")
             gameon = False
@@ -40,8 +48,11 @@ def DBL07():
                
     elif user_choice == 'shield':
         if computer_choice == 'shoot':
-            computer_ammo -= 1
-            print("Deflected!")
+            if computer_ammo <= 0: 
+                print("Computer out of ammo!")
+            else:
+                computer_ammo -= 1
+                print("Deflected!")
             
         elif computer_choice == 'reload':
             computer_ammo += 1
@@ -51,8 +62,11 @@ def DBL07():
         if computer_choice == 'reload':
             computer_ammo += 1
         elif computer_choice == 'shoot':
-            print("You lose")
-            gameon = False
+            if computer_ammo <= 0: 
+                print("Computer out of ammo!")
+            else:
+                print("You lose")
+                gameon = False
     
     
     return gameon, computer_ammo, user_ammo
