@@ -55,7 +55,7 @@ def DBL07():
             gameon = False
     
     
-    return gameon
+    return gameon, computer_ammo, user_ammo
 
 while gameon:
-    gameon = DBL07()
+    gameon, computer_ammo, user_ammo = DBL07(computer_ammo, user_ammo)
