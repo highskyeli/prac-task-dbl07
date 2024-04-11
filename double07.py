@@ -15,7 +15,7 @@ def DBL07(computer_ammo, user_ammo):
     gameon = True
 
     choices = ['shoot', 'shield', 'reload']
-    computer_choice = random.choices(choices, weights = [5,10,3])[0]
+    computer_choice = random.choices(choices, weights = [5,6,3])[0]
     user_choice = input("Enter your choice of Shoot, Shield, or Reload: ").lower()
 
     print("Your opponent chose:", computer_choice)
